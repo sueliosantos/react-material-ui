@@ -1,7 +1,7 @@
 import { Avatar, Divider, Drawer, Icon, List, ListItemButton, ListItemIcon, ListItemText, useMediaQuery, useTheme } from '@mui/material';
 import { Box } from '@mui/system';
 import { useMatch, useNavigate, useResolvedPath } from 'react-router-dom';
-import { useDrawerContext } from '../../contexts';
+import { useAppThemeContext, useDrawerContext } from '../../contexts';
 
 interface IMenuLateraProps {
   children: React.ReactNode;
@@ -39,6 +39,7 @@ export const MenuLateral: React.FC<IMenuLateraProps> = ({ children }) => {
   const theme = useTheme();
 
   const smDonw = useMediaQuery(theme.breakpoints.down('sm'));
+  const { toggleTheme } = useAppThemeContext();
 
   return (
     <>
@@ -56,7 +57,7 @@ export const MenuLateral: React.FC<IMenuLateraProps> = ({ children }) => {
 
             <Avatar
               sx={{ height: theme.spacing(12), width: theme.spacing(12) }}
-              src="/static/images/avatar/1.jpg"
+              src="https://cdn-icons-png.flaticon.com/512/1373/1373255.png"
             />
           </Box>
 
@@ -76,6 +77,17 @@ export const MenuLateral: React.FC<IMenuLateraProps> = ({ children }) => {
               }
             </List>
 
+          </Box>
+
+          <Box>
+            <List component="nav">
+              <ListItemButton onClick={toggleTheme}>
+                <ListItemIcon>
+                  <Icon>dark_mode</Icon>
+                </ListItemIcon>
+                <ListItemText primary="Alternar tema" />
+              </ListItemButton>
+            </List>
           </Box>
         </Box>
       </Drawer>
