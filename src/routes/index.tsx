@@ -1,14 +1,26 @@
-import Button from "@mui/material/Button"
-import { Routes, Route, Navigate } from "react-router-dom"
-import { useAppThemeContext } from "../shared/contexts"
+import { Routes, Route, Navigate } from 'react-router-dom';
+import { useDrawerContext } from '../shared/contexts';
+import { useEffect } from 'react';
+import { Dashboard } from '../pages';
 
 export const AppRoutes = () => {
-  const { toggleTheme } = useAppThemeContext()
+  const { setDrawerOptions } = useDrawerContext();
+
+  useEffect(() => {
+    setDrawerOptions([
+      {
+        label: 'Página inicial',
+        path: '/dashboard',
+        icon: 'home'
+      },
+    ]);
+  }, []);
+
   return (
     <Routes>
-      <Route path="/dashboard" element={<Button variant="contained" color="primary" onClick={toggleTheme}>Ola mundo</Button>} />
+      <Route path="/dashboard" element={<Dashboard />} />
       <Route path="*" element={<Navigate to="/dashboard" />} />
     </Routes>
 
-  )
-}
+  );
+};
