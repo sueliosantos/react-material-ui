@@ -1,6 +1,8 @@
 import { Search } from "@mui/icons-material";
 import { Box, Button, Icon, InputAdornment, Paper, TextField, useTheme } from "@mui/material";
 
+import { Environment } from "../../environment";
+
 interface IBarraFerramentasListagem {
   textoBusca?: string;
   mostrarInputBusca?: boolean;
@@ -37,7 +39,7 @@ export const BarraFerramentasListagem: React.FC<IBarraFerramentasListagem> = ({
           value={textoBusca}
           onChange={(e) => aoMudatTextoBusca?.(e.target.value)}
           size="small"
-          placeholder="Pesquisar"
+          placeholder={Environment.INPUT_BUSCA}
           InputProps={{
             startAdornment: (
               <InputAdornment position="end">
