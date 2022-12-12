@@ -1,12 +1,19 @@
-import { Box, Button, Divider, Icon, Paper, useTheme } from "@mui/material";
+import { Box, Button, Divider, Icon, Paper, Skeleton, Typography, useMediaQuery, useTheme } from "@mui/material";
 
 interface IBarraFerramentasDetalhePorps {
   textoBotaoNovo?: string;
-  monstrarBotaoNovo?: string;
-  monstrarBotaoVoltar?: string;
-  monstrarBotaoApagar?: string;
+
   monstrarBotaoSalvar?: string;
   monstrarBotaoSalvarEFechar?: string;
+  monstrarBotaoApagar?: string;
+  monstrarBotaoNovo?: string;
+  monstrarBotaoVoltar?: string;
+
+  monstrarBotaoSalvarCarregando?: boolean;
+  monstrarBotaoSalvarEFecharCarregando?: string;
+  monstrarBotaoApagarCarregando?: string;
+  monstrarBotaoNovoCarregando?: string;
+  monstrarBotaoVoltarCarregando?: string;
 
   aoClicarEmNovo?: () => void;
   aoClicarEmVoltar?: () => void;
@@ -25,6 +32,12 @@ export const BarraFerramentasDetalhe: React.FC<IBarraFerramentasDetalhePorps> = 
   monstrarBotaoSalvar = true,
   monstrarBotaoSalvarEFechar = false,
 
+  monstrarBotaoNovoCarregando = false,
+  monstrarBotaoVoltarCarregando = false,
+  monstrarBotaoApagarCarregando = false,
+  monstrarBotaoSalvarCarregando = false,
+  monstrarBotaoSalvarEFecharCarregando = false,
+
   aoClicarEmNovo,
   aoClicarEmVoltar,
   aoClicarEmApagar,
@@ -32,6 +45,8 @@ export const BarraFerramentasDetalhe: React.FC<IBarraFerramentasDetalhePorps> = 
   aoClicarEmSalvarEFechar,
 }) => {
   const theme = useTheme();
+  const smDonw = useMediaQuery(theme.breakpoints.down('sm'));
+  const mdDonw = useMediaQuery(theme.breakpoints.down('md'));
   return (
     <Box
       height={theme.spacing(5)}
@@ -43,7 +58,7 @@ export const BarraFerramentasDetalhe: React.FC<IBarraFerramentasDetalhePorps> = 
       gap={1}
       alignItems="center"
     >
-      {monstrarBotaoSalvar && (
+      {(monstrarBotaoSalvar && !monstrarBotaoSalvarCarregando) && (
         <Button
           color="primary"
           variant="contained"
@@ -51,12 +66,17 @@ export const BarraFerramentasDetalhe: React.FC<IBarraFerramentasDetalhePorps> = 
           endIcon={<Icon>save</Icon>}
           onClick={aoClicarEmSalvar}
         >
-          Salvar
+          <Typography variant="button" whiteSpace='nowrap' textOverflow='ellipsis' overflow='hidden'>
+            Salvar
+          </Typography>
         </Button>
-
       )}
 
-      {monstrarBotaoSalvarEFechar && (
+      {monstrarBotaoSalvarCarregando && (
+        < Skeleton width={110} height={60} />
+      )}
+
+      {(monstrarBotaoSalvarEFechar && !monstrarBotaoSalvarEFecharCarregando && !smDonw && !mdDonw) && (
         <Button
           color="primary"
           variant="outlined"
@@ -64,12 +84,16 @@ export const BarraFerramentasDetalhe: React.FC<IBarraFerramentasDetalhePorps> = 
           endIcon={<Icon>save</Icon>}
           onClick={aoClicarEmSalvarEFechar}
         >
-          Salvar e voltar
+          <Typography variant="button" whiteSpace='nowrap' textOverflow='ellipsis' overflow='hidden'>
+            Salvar e voltar
+          </Typography>
         </Button>
-
+      )}
+      {(monstrarBotaoSalvarEFecharCarregando && !smDonw && !mdDonw) && (
+        <Skeleton width={180} height={60} />
       )}
 
-      {monstrarBotaoApagar && (
+      {(monstrarBotaoApagar && !monstrarBotaoApagarCarregando) && (
         <Button
           color="primary"
           variant="outlined"
@@ -77,11 +101,17 @@ export const BarraFerramentasDetalhe: React.FC<IBarraFerramentasDetalhePorps> = 
           endIcon={<Icon>delete</Icon>}
           onClick={aoClicarEmApagar}
         >
-          Apagar
+          <Typography variant="button" whiteSpace='nowrap' textOverflow='ellipsis' overflow='hidden'>
+            Apagar
+          </Typography>
         </Button>
-
       )}
-      {monstrarBotaoNovo &&
+
+      {monstrarBotaoApagarCarregando && (
+
+        <Skeleton width={110} height={60} />
+      )}
+      {(monstrarBotaoNovo && !monstrarBotaoNovoCarregando && !smDonw) &&
         (
 
           <Button
@@ -91,13 +121,22 @@ export const BarraFerramentasDetalhe: React.FC<IBarraFerramentasDetalhePorps> = 
             endIcon={<Icon>add</Icon>}
             onClick={aoClicarEmNovo}
           >
-            {textoBotaoNovo}
+            <Typography variant="button" whiteSpace='nowrap' textOverflow='ellipsis' overflow='hidden'>
+              {textoBotaoNovo}
+            </Typography>
           </Button>
         )}
-
-      <Divider variant="middle" orientation="vertical" />
+      {(monstrarBotaoNovoCarregando && !smDonw) && (
+        <Skeleton width={110} height={60} />
+      )}
 
       {monstrarBotaoVoltar &&
+        (monstrarBotaoNovo || monstrarBotaoApagar || monstrarBotaoSalvar || monstrarBotaoSalvarEFechar) &&
+        (
+          <Divider variant="middle" orientation="vertical" />
+        )}
+
+      {(monstrarBotaoVoltar && !monstrarBotaoVoltarCarregando) &&
         (
           <Button
             color="primary"
@@ -106,10 +145,15 @@ export const BarraFerramentasDetalhe: React.FC<IBarraFerramentasDetalhePorps> = 
             endIcon={<Icon>arrow_back</Icon>}
             onClick={aoClicarEmVoltar}
           >
-            Voltar
+            <Typography variant="button" whiteSpace='nowrap' textOverflow='ellipsis' overflow='hidden'>
+              Voltar
+            </Typography>
           </Button>
-
         )}
+
+      {monstrarBotaoVoltarCarregando && (
+        <Skeleton width={110} height={60} />
+      )}
     </Box>
   );
 };
