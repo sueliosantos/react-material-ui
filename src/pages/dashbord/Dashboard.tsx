@@ -1,4 +1,3 @@
-import Box from "@mui/material/Box";
 import { BarraFerramentasDetalhe, BarraFerramentasListagem } from "../../shared/components";
 import { LayoutBasePagina } from "../../shared/layouts";
 
