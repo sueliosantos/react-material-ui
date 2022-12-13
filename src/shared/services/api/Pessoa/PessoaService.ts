@@ -1,4 +1,4 @@
-import { Environment } from "./../../../environment/index";
+import { Environment } from "../../../environment/index";
 import { Api } from "../axios-config";
 
 type TPessoaComTotalCount = {
