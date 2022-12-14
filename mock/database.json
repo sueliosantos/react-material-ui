@@ -4,7 +4,67 @@
       "id": 1,
       "email": "sueliosantos@gmail.com",
       "cidadeId": 1,
-      "nomeCompleto": "suelio silva dos santos"
+      "nomeCompleto": "Suelio Silva dos Santos"
+    },
+    {
+      "id": 2,
+      "email": "clau.massa@gmail.com",
+      "cidadeId": 1,
+      "nomeCompleto": "Claudiana Massa Santas"
+    },
+    {
+      "id": 3,
+      "email": "giovanna.massa@gmail.com",
+      "cidadeId": 1,
+      "nomeCompleto": "Giovanna Massa Santos"
+    },
+    {
+      "id": 4,
+      "email": "pedro@gmail.com",
+      "cidadeId": 1,
+      "nomeCompleto": "Pedro dos Santos"
+    },
+    {
+      "id": 6,
+      "email": "neymar@gmai.com",
+      "cidadeId": 1,
+      "nomeCompleto": "Neymar dos Santos Brasileiro"
+    },
+    {
+      "id": 7,
+      "email": "cr7@gmail.com",
+      "cidadeId": 1,
+      "nomeCompleto": "Cristiano Ronaldo"
+    },
+    {
+      "id": 8,
+      "email": "lapulga@gmail.com",
+      "cidadeId": 1,
+      "nomeCompleto": "Lyonel Messi"
+    },
+    {
+      "id": 9,
+      "email": "romariofaria@gmail.com",
+      "cidadeId": 1,
+      "nomeCompleto": "Romário Faria dos Santos"
+    },
+    {
+      "id": 10,
+      "email": "lewandowsk@gmail.com",
+      "cidadeId": 1,
+      "nomeCompleto": "Robert Lewandowsk"
+    },
+    {
+      "id": 11,
+      "email": "mane@gmail.com",
+      "cidadeId": 1,
+      "nomeCompleto": "Mané"
+    },
+    {
+      "id": 12,
+      "email": "ronaldonazario@gmail.com",
+      "cidadeId": 1,
+      "nomeCompleto": "Ronaldo Nazário"
     }
   ]
 }
