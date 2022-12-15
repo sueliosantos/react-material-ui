@@ -3,17 +3,17 @@ import { Box, Button, Divider, Icon, Paper, Skeleton, Typography, useMediaQuery,
 interface IBarraFerramentasDetalhePorps {
   textoBotaoNovo?: string;
 
-  monstrarBotaoSalvar?: string;
-  monstrarBotaoSalvarEFechar?: string;
-  monstrarBotaoApagar?: string;
-  monstrarBotaoNovo?: string;
-  monstrarBotaoVoltar?: string;
+  monstrarBotaoSalvar?: boolean;
+  monstrarBotaoSalvarEFechar?: boolean;
+  monstrarBotaoApagar?: boolean;
+  monstrarBotaoNovo?: boolean;
+  monstrarBotaoVoltar?: boolean;
 
   monstrarBotaoSalvarCarregando?: boolean;
-  monstrarBotaoSalvarEFecharCarregando?: string;
-  monstrarBotaoApagarCarregando?: string;
-  monstrarBotaoNovoCarregando?: string;
-  monstrarBotaoVoltarCarregando?: string;
+  monstrarBotaoSalvarEFecharCarregando?: boolean;
+  monstrarBotaoApagarCarregando?: boolean;
+  monstrarBotaoNovoCarregando?: boolean;
+  monstrarBotaoVoltarCarregando?: boolean;
 
   aoClicarEmNovo?: () => void;
   aoClicarEmVoltar?: () => void;
