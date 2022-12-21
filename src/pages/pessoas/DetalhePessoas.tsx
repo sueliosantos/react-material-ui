@@ -1,13 +1,22 @@
-import { LinearProgress } from "@mui/material";
-import { useEffect, useState } from "react";
+import { FormHandles } from "@unform/core";
+import { Form } from "@unform/web";
+import { useEffect, useRef, useState } from "react";
 import { useNavigate, useParams } from "react-router-dom";
 import { BarraFerramentasDetalhe, BarraFerramentasListagem } from "../../shared/components";
+import { VTextField } from "../../shared/forms";
 import { LayoutBasePagina } from "../../shared/layouts";
 import { PessoaService } from "../../shared/services/api/pessoa/PessoaService";
 
+interface IFormData {
+  email: string;
+  cidadeId: number;
+  nomeCompleto: string;
+}
 export const DetalhePessoas: React.FC = () => {
   const { id = 'nova' } = useParams<'id'>();
   const navigate = useNavigate();
+
+  const formRef = useRef<FormHandles>(null);
 
   const [isLoading, setIsLoading] = useState(false);
   const [nome, setNome] = useState('');
@@ -23,14 +32,31 @@ export const DetalhePessoas: React.FC = () => {
             navigate('/pessoas');
           } else {
             setNome(result.nomeCompleto);
-            console.log(result);
+            formRef.current?.setData(result);
           }
         });
     }
   }, [id]);
 
-  const handleSave = () => {
-    console.log('save');
+  const handleSave = (dados: IFormData) => {
+    if (id === 'nova') {
+
+      PessoaService.create(dados).then((result) => {
+        setIsLoading(false);
+        if (result instanceof Error) {
+          alert(result.message);
+        } else {
+          navigate(`/pessoas/detalhe/${result}`);
+        }
+      });
+    } else {
+      PessoaService.updateById(Number(id), { id: Number(id), ...dados }).then((result) => {
+        setIsLoading(false);
+        if (result instanceof Error) {
+          alert(result.message);
+        }
+      });
+    }
   };
 
   const handleDelete = (id: number) => {
@@ -56,18 +82,19 @@ export const DetalhePessoas: React.FC = () => {
         monstrarBotaoNovo={id !== 'nova'}
         monstrarBotaoApagar={id !== 'nova'}
 
-        aoClicarEmSalvar={handleSave}
-        aoClicarEmSalvarEFechar={handleSave}
+        aoClicarEmSalvar={() => formRef.current?.submitForm()}
+        aoClicarEmSalvarEFechar={() => formRef.current?.submitForm()}
         aoClicarEmApagar={() => handleDelete(Number(id))}
 
         aoClicarEmNovo={() => navigate('/pessoas/detalhe/nova')}
         aoClicarEmVoltar={() => navigate('/pessoas')}
       />}
     >
-      {(isLoading && (
-        <LinearProgress variant="indeterminate" />
-      ))}
-      <p>teste</p>
+      <Form ref={formRef} onSubmit={handleSave}>
+        <VTextField placeholder="Nome completo" name="nomeCompleto" />
+        <VTextField placeholder="Email" name="email" />
+        <VTextField placeholder="Cidade" name="cidadeId" />
+      </Form>
     </LayoutBasePagina >
   );
 };
